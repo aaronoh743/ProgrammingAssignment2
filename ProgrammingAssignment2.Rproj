@@ -1,0 +1,35 @@
+## Put comments here that give an overall description of what your
+## functions do
+
+## This function will take in the obejct returned by makeCacheMatrix. 
+## It first calls geinverse(); if there is an inverse matrix, then it will return i as the result
+## If no inverse matrix, it will call get() and fet the matrix stored in the object 
+## Inverse matrix is calculated and stroed into the object and return the inverse matrix
+
+makeCacheMatrix <- function(x = matrix()) {
+  i <- NULL
+  set <- function(y) {
+    x <<- y
+    i <<- NULL
+  }
+  get <- function() x
+  setInverse <- function(inverse)inv <<- inverse
+  getInverse <- function()i
+  list(set=set, get=get, setInverse=setInverse,getInverse=getInverse)
+  
+}
+
+
+cacheSolve <- function(x, ...) {
+  ## Return a matrix that is the inverse of 'x'  
+  i <- x$getInverse()
+  if(!is.null(i)) {
+    return(i)
+  }
+  
+  data <- x$get()
+  i <- solve(data, ...)
+  x$setInverse(i)
+  return(i)
+}
+
